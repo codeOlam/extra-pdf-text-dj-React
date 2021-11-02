@@ -5,8 +5,6 @@
 .App-form {
   height: 40vmin;
   pointer-events: none;
-  justify-content: center;
-  justify-items: center;
 }
 
 /* @media (prefers-reduced-motion: no-preference) {

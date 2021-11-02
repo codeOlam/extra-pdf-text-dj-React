@@ -6,17 +6,15 @@ Django is a web-framework written in Python and runs the backend for many of the
 
 This app features the following:
 
--- BaseUserManager and AbstractUser for custom user authentication
-
--- Authentication Backend configured to authenticate users, using email and password
-
--- Allow you to CreateUser Type e.g: Teacher or Student at signup
+-- Allow user upload document and authomatically extract text from the pdf.
 
 ## Technology and Requirements
 
 1. Django==3.2.8
 2. Python3
 3. djangorestframework==3.12.4
+4. Reactjs==^17.0.2
+5. Typescript==^4.1.2
 
 ## Installations
 

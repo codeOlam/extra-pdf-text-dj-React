@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     # other app
     'accounts',
+    'extract_text',
 ]
 
 MIDDLEWARE = [
