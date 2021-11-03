@@ -10,7 +10,11 @@ type DocArrType = {
 }[];
 
 const Documents = () => {
-  const [documents, setDocuments] = useState<DocArrType>();
+  const [documents, setDocuments] = useState<DocArrType>([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const fetchData = () => {
     axios
@@ -25,18 +29,15 @@ const Documents = () => {
       });
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <div>
       <p>document list component</p>
-      {documents?.map((item, index) => {
+      {documents.map((item, index) => {
         return (
-          <>
-            <div key={index}>{item.title}</div> <div>{item.pdf_doc}</div>
-          </>
+          <div key={index}>
+            <div>{item.title}</div>
+            <div>{item.pdf_doc}</div>
+          </div>
         );
       })}
     </div>
