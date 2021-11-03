@@ -1,4 +1,4 @@
-import React from "react";
+import Documents from "./components/Documents";
 import "./App.css";
 
 function App() {
@@ -10,6 +10,10 @@ function App() {
           <input type="file" id="myFile" name="filename" />
           <input type="submit" />
         </form>
+      </div>
+      <div>
+        <p>Extracted Texts</p>
+        <Documents />
       </div>
     </div>
   );
