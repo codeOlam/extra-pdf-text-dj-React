@@ -8,11 +8,8 @@ from rest_framework.decorators import api_view
 from extract_text.models import UploadDoc
 from .serializers import UploadDocModelSerializer
 
-# class UploadDocApiView(APIView):
-#     http_method_names = ['GET', 'POST']
 
-
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def doc_list_api_view(request):
     if request.method == 'GET':
         qs = UploadDoc.objects.all()
@@ -20,11 +17,15 @@ def doc_list_api_view(request):
 
         return Response(serializer.data)
 
-    elif request.method == "POST":
+
+@api_view(['POST'])
+def upload_doc_api_view(request):
+    if request.method == "POST":
         serializer = UploadDocModelSerializer(data=request.data)
 
         if serializer.is_valid():
             print("request data: ", request.data)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

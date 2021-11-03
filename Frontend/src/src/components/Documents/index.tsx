@@ -16,6 +16,7 @@ const Documents = () => {
     fetchData();
   }, []);
 
+  //Todo: change to async func
   const fetchData = () => {
     axios
       .get(documents_url)
