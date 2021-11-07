@@ -1,4 +1,4 @@
-import Documents from "./components/Documents";
+// import Documents from "./components/Documents";
 import UploadPdf from "./components/UploadPdf";
 import ExtractText from "./components/ExtractedText";
 

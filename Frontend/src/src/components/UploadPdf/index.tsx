@@ -28,12 +28,16 @@ const UploadPdf = () => {
         uploadData.append("title", title);
         uploadData.append("pdf_doc", pdf_doc!, pdf_doc?.name as string);
 
-        await axios({
+        const { data } = await axios({
           method: "post",
           headers: { "Content-Type": "multipart/form-data" },
           data: uploadData,
           url: upload_url,
         });
+
+        if (data.title && data.pdf_doc !== null) {
+          alert("file successfully uploaded");
+        }
       } else {
         alert("Please Select a pdf document to upload and title");
       }
