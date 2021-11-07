@@ -23,16 +23,20 @@ const UploadPdf = () => {
 
   const handleUploadFile = async () => {
     const uploadData = new FormData();
-    uploadData.append("title", title);
-    uploadData.append("pdf_doc", pdf_doc!, pdf_doc?.name as string);
-
     try {
-      await axios({
-        method: "post",
-        headers: { "Content-Type": "multipart/form-data" },
-        data: uploadData,
-        url: upload_url,
-      });
+      if (title && pdf_doc) {
+        uploadData.append("title", title);
+        uploadData.append("pdf_doc", pdf_doc!, pdf_doc?.name as string);
+
+        await axios({
+          method: "post",
+          headers: { "Content-Type": "multipart/form-data" },
+          data: uploadData,
+          url: upload_url,
+        });
+      } else {
+        alert("Please Select a pdf document to upload and title");
+      }
     } catch (error) {
       throw error;
     }

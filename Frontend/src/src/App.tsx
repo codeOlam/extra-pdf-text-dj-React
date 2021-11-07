@@ -9,8 +9,7 @@ function App() {
     <div className="App">
       <UploadPdf />
       <div>
-        <p>Extracted Texts</p>
-        <Documents />
+        {/* <Documents /> */}
         <ExtractText />
       </div>
     </div>

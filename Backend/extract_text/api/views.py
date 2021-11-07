@@ -1,6 +1,3 @@
-from rest_framework import serializers
-from rest_framework.serializers import Serializer
-from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, parser_classes
@@ -19,19 +16,19 @@ def display_extracted_text(request):
     if request.method == "GET":
         latest_data = UploadDoc.objects.last()
         serializer = UploadDocModelSerializer(latest_data)
-        pdf_file = fitz.open(
-            file_path / serializer.data['pdf_doc'].strip("/")
-        )
+        try:
+            pdf_file = fitz.open(
+                file_path / serializer.data['pdf_doc'].strip("/")
+            )
 
-        for _, page in enumerate(pdf_file.pages(), start=1):
-            text = page.get_text()
+            for _, page in enumerate(pdf_file.pages(), start=1):
+                text = page.get_text()
 
-        # print("\n[display_extracted_text] text: ", text)
-        # print("\n[display_extracted_text] pdf_file: ", pdf_file)
-        # print("[display_extracted_text] serializer.data['pdf_doc']: ",
-        #       serializer.data['pdf_doc'])
-
-        return Response(text)
+            return Response(text)
+        except:
+            # this is just a rough way of catching this error.
+            # in the future i will be validating to make sure only pdf can be uploaded from frontend
+            return Response("Make sure the file uploaded is in pdf formatt!")
 
 
 @api_view(['GET'])
