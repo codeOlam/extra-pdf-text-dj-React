@@ -6,13 +6,8 @@ import "./uploadPdf.css";
 const upload_url = "http://127.0.0.1:8000/api/upload/";
 
 const UploadPdf = () => {
-  const [file, setFile] = useState<File>();
+  const [pdf_doc, setPdf_doc] = useState<File>();
   const [title, setTitle] = useState("");
-
-  const fileUpload = {
-    title: title,
-    pdf_doc: file,
-  };
 
   const handleOnChangeTitleInput = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -20,39 +15,49 @@ const UploadPdf = () => {
     setTitle(event.target.value);
   };
 
-  const handleOnChangeFileInput = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFile(event.target.files![0]);
+  const handleOnChangeFileInput = (inputFile: FileList) => {
+    if (inputFile && inputFile !== null) {
+      setPdf_doc(inputFile[0]);
+    }
   };
 
-  //Todo: change to async func
   const handleUploadFile = async () => {
-    await axios
-      .post(upload_url, fileUpload)
-      .then((res) => {
-        console.log("[handleUploadFile] res: ", res.data);
-      })
-      .catch((error) => console.log("[handleUploadFile] error:", error));
+    const uploadData = new FormData();
+    uploadData.append("title", title);
+    uploadData.append("pdf_doc", pdf_doc!, pdf_doc?.name as string);
+
+    try {
+      await axios({
+        method: "post",
+        headers: { "Content-Type": "multipart/form-data" },
+        data: uploadData,
+        url: upload_url,
+      });
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
     <div className="App-form">
       <p className=".App-header">Upload PDF</p>
-      <form>
-        <input
-          type="text"
-          placeholder="enter title"
-          name={title}
-          value={title}
-          onChange={handleOnChangeTitleInput}
-        />
-        <input type="file" onChange={handleOnChangeFileInput} />
-        <button type="submit" onClick={handleUploadFile}>
-          {" "}
-          Submit{" "}
-        </button>
-      </form>
+
+      <input
+        type="text"
+        placeholder="enter title"
+        name={title}
+        value={title}
+        onChange={handleOnChangeTitleInput}
+      />
+      <input
+        type="file"
+        name="file"
+        onChange={(e) => handleOnChangeFileInput(e.target.files as FileList)}
+      />
+      <button type="submit" onClick={handleUploadFile}>
+        {" "}
+        Submit{" "}
+      </button>
     </div>
   );
 };
