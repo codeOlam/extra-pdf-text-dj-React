@@ -12,11 +12,6 @@ from extract_text.models import UploadDoc
 from .serializers import UploadDocModelSerializer
 
 file_path = Path(__file__).resolve().parent.parent.parent
-print("file_path", file_path)
-pdf_file = fitz.open(
-    file_path / 'docs/The_Purpose_and_Power_of_Love__Marriage__PDFDrive_.pdf')
-
-print("pdf_file: ", pdf_file)
 
 
 @api_view(["GET"])
@@ -25,12 +20,18 @@ def display_extracted_text(request):
         latest_data = UploadDoc.objects.last()
         serializer = UploadDocModelSerializer(latest_data)
         pdf_file = fitz.open(
-            file_path / serializer.data['pdf_doc'].strip("/"))
-        print("[display_extracted_text] pdf_file: ", pdf_file)
-        print("[display_extracted_text] serializer.data['pdf_doc']: ",
-              serializer.data['pdf_doc'])
+            file_path / serializer.data['pdf_doc'].strip("/")
+        )
 
-        return Response(serializer.data)
+        for _, page in enumerate(pdf_file.pages(), start=1):
+            text = page.get_text()
+
+        # print("\n[display_extracted_text] text: ", text)
+        # print("\n[display_extracted_text] pdf_file: ", pdf_file)
+        # print("[display_extracted_text] serializer.data['pdf_doc']: ",
+        #       serializer.data['pdf_doc'])
+
+        return Response(text)
 
 
 @api_view(['GET'])

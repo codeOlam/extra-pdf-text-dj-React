@@ -19,9 +19,7 @@ const ExtractText = () => {
   const fetchText = async () => {
     try {
       const { data } = await axios.get(extract_url);
-      console.log("[fetchText] data: ", data.id);
       setText(data);
-      console.log("[fetchText] text:", text?.id);
     } catch (error) {
       throw error;
     }
@@ -31,9 +29,7 @@ const ExtractText = () => {
     <div>
       <div>Extracted Text is: </div>
       <div>
-        <p>id: {text?.id}</p>
-        <p>title: {text?.title}</p>
-        <p>pdf_doc: {text?.pdf_doc}</p>
+        <p>{text}</p>
       </div>
     </div>
   );
