@@ -15,6 +15,7 @@ This app features the following:
 3. djangorestframework==3.12.4
 4. Reactjs==^17.0.2
 5. Typescript==^4.1.2
+6. axios==^0.24.0
 
 ## Installations
 
@@ -51,7 +52,11 @@ This app features the following:
 5. To run the development server
    `(venv)path/to/app/src$ python manage.py runserver `
 
-6. go to your web browser and enter 127.0.0.1:8000
+6. install frontend react dependencies using yarn you can also use npx
+   `path/to/Frontend/src$ yarn install`
+
+7. to start frontend react server
+   `path/to/Frontend/src$ yarn start`
 
 ## Recommendations
 
@@ -62,6 +67,9 @@ This App is not designed to be used full in deployement. You are free to make an
 1. [Django 3.x Doc](https://docs.djangoproject.com/en/3.2/)
 2. [DRF 3.X](https://www.django-rest-framework.org/)
 3. [My Previous Repo](https://github.com/codeOlam/dj-multi-user-auth)
+4. [axios](https://www.npmjs.com/package/axios)
+5. [Reactjs](https://reactjs.org/docs/getting-started.html)
+6. [Typescript](https://www.typescriptlang.org/docs/)
 
 ### Other Resources
 

@@ -1,5 +1,6 @@
 import Documents from "./components/Documents";
 import UploadPdf from "./components/UploadPdf";
+import ExtractText from "./components/ExtractedText";
 
 import "./App.css";
 
@@ -10,6 +11,7 @@ function App() {
       <div>
         <p>Extracted Texts</p>
         <Documents />
+        <ExtractText />
       </div>
     </div>
   );

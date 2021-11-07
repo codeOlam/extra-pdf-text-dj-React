@@ -19,10 +19,18 @@ pdf_file = fitz.open(
 print("pdf_file: ", pdf_file)
 
 
-# @api_view(["GET"])
-# def display_extracted_text(request):
-#     if request.method == "GET":
-#         queryset = UploadDoc.objects.filter()
+@api_view(["GET"])
+def display_extracted_text(request):
+    if request.method == "GET":
+        latest_data = UploadDoc.objects.last()
+        serializer = UploadDocModelSerializer(latest_data)
+        pdf_file = fitz.open(
+            file_path / serializer.data['pdf_doc'].strip("/"))
+        print("[display_extracted_text] pdf_file: ", pdf_file)
+        print("[display_extracted_text] serializer.data['pdf_doc']: ",
+              serializer.data['pdf_doc'])
+
+        return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -30,7 +38,6 @@ def doc_list_api_view(request):
     if request.method == 'GET':
         qs = UploadDoc.objects.all()
         serializer = UploadDocModelSerializer(qs, many=True)
-        print("\n[serializer.pdf_doc]: ", serializer.data[1])
 
         return Response(serializer.data)
 
