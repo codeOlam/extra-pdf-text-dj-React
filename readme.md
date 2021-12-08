@@ -16,6 +16,7 @@ This app features the following:
 4. Reactjs==^17.0.2
 5. Typescript==^4.1.2
 6. axios==^0.24.0
+7. pymupdf==1.19.2 (for the text extraction)
 
 ## Installations
 
@@ -70,6 +71,7 @@ This App is not designed to be used full in deployement. You are free to make an
 4. [axios](https://www.npmjs.com/package/axios)
 5. [Reactjs](https://reactjs.org/docs/getting-started.html)
 6. [Typescript](https://www.typescriptlang.org/docs/)
+7. [pymupdf](https://github.com/pymupdf/PyMuPDF)
 
 ### Other Resources
 
